@@ -30,7 +30,7 @@
                     @endauth
                 </div>
             @endif
-            <a class="text-white" href="/billing">
+            <a class="text-white text-center justify-center flex" href="/billing">
                 Manage Subscription
             </a>
 
