@@ -13,7 +13,7 @@ class UpdateSubscriptionCredits
     /**
      * Handle the event.
      */
-    public function handle(SubscriptionUpdated $event): void
+    public function handle(SubscriptionCreated $event): void
     {
 
 // Asumiendo que $event->payload ya es un array asociativo como se muestra en tu ejemplo
