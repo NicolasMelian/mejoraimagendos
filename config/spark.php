@@ -99,8 +99,8 @@ return [
                 [
                     'name' => 'Mejoraimagen',
                     'short_description' => 'Adquiere uno de nuestros planes',
-                    'monthly_id' => env('SPARK_STANDARD_MONTHLY_PLAN', 'pri_01hqptgf5k4g56shg0m0pf3twp'),
-                    'yearly_id' => env('SPARK_STANDARD_YEARLY_PLAN', 'pri_01hqpth8jcmpvcn6j8dmbwmgqj'),
+                    'monthly_id' => env('SPARK_STANDARD_MONTHLY_PLAN', 'pri_01ha2h29b39sgwd9rj5ebwn7jr'),
+                    'yearly_id' => env('SPARK_STANDARD_YEARLY_PLAN', 'pri_01ha2h3cqg5fervw0zr2zehk0b'),
                     'features' => [
                         'Feature 1',
                         'Feature 2',
