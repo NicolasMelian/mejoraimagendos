@@ -4,9 +4,8 @@ namespace App\Listeners;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
-use Laravel\Spark\Events\SubscriptionUpdated;
+use Laravel\Paddle\Events\SubscriptionCreated;
 use App\Models\User;
-use Laravel\Spark\Plan;
 use Illuminate\Support\Facades\Log;
 
 
@@ -23,7 +22,7 @@ class UpdateSubscriptionCredits
     /**
      * Handle the event.
      */
-    public function handle(SubscriptionUpdated $event): void
+    public function handle(SubscriptionCreated $event): void
     {
         \Log::info(print_r($event, true));
 
