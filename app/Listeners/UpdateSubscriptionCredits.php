@@ -24,6 +24,9 @@ class UpdateSubscriptionCredits
             return;
         }
 
+        // log al price_id
+        Log::info("price_id: {$priceId}");
+
         // Asigna créditos basado en el price_id
         switch ($priceId) {
             case 'pri_01ha2h3cqg5fervw0zr2zehk0b': // ID para el plan anual
