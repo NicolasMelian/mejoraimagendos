@@ -26,8 +26,16 @@ class UpdateSubscriptionCredits
     {
         \Log::info(print_r($event, true));
 
+        // log evento
+        \Log::info('Evento SubscriptionUpdated');
+
+
+
 
         $user = $event->user;
+
+        // log $user 
+        
         $plan = $event->plan;
 
         if ($plan->monthly_id) {
