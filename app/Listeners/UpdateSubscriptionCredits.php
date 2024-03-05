@@ -4,7 +4,7 @@ namespace App\Listeners;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
-use Laravel\Paddle\Events\SubscriptionCreated;
+use Laravel\Paddle\Events\SubscriptionUpdated;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
 
@@ -22,7 +22,7 @@ class UpdateSubscriptionCredits
     /**
      * Handle the event.
      */
-    public function handle(SubscriptionCreated $event): void
+    public function handle(SubscriptionUpdated $event): void
     {
         \Log::info(print_r($event, true));
 

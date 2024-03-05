@@ -6,7 +6,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
-use Laravel\Paddle\Events\SubscriptionCreated;
+use Laravel\Paddle\Events\SubscriptionUpdated;
 use App\Listeners\UpdateSubscriptionCredits;
 
 class EventServiceProvider extends ServiceProvider
@@ -20,8 +20,8 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-        Laravel\Paddle\Events\SubscriptionCreated::class => [
-            \App\Listeners\UpdateSubscriptionCredits::class,
+        Laravel\Paddle\Events\SubscriptionUpdated::class => [
+            UpdateSubscriptionCredits::class,
         ],
 
     ];
