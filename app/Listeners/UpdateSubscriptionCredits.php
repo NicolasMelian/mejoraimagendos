@@ -1,12 +1,9 @@
 <?php
-
 namespace App\Listeners;
 
 use Laravel\Paddle\Events\SubscriptionCreated;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
-
-
 
 class UpdateSubscriptionCredits
 {
@@ -15,7 +12,6 @@ class UpdateSubscriptionCredits
      */
     public function handle(SubscriptionCreated $event): void
     {
-
         // Acceso al price_id del payload del evento
         $priceId = $event->payload['data']['items'][0]['price']['id'];
 

@@ -1,46 +1,44 @@
 <?php
 
-namespace App\Listeners;
+namespace App\Providers;
 
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
+use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Event;
 use Laravel\Paddle\Events\SubscriptionCreated;
-use App\Models\User;
-use Illuminate\Support\Facades\Log;
+use App\Listeners\UpdateSubscriptionCredits;
 
-class UpdateSubscriptionCredits
+class EventServiceProvider extends ServiceProvider
 {
     /**
-     * Handle the event.
+     * The event to listener mappings for the application.
+     *
+     * @var array<class-string, array<int, class-string>>
      */
-    public function handle(SubscriptionCreated $event): void
+    protected $listen = [
+        Registered::class => [
+            SendEmailVerificationNotification::class,
+        ],
+        Laravel\Paddle\Events\SubscriptionCreated::class => [
+            UpdateSubscriptionCredits::class,
+        ],
+
+    ];
+
+    /**
+     * Register any events for your application.
+     */
+    public function boot(): void
     {
-        // Acceso al price_id del payload del evento
-        $priceId = $event->payload['data']['items'][0]['price']['id'];
+        //
+    }
 
-        // Acceso al usuario billable (asegúrate de que este acceso sea correcto según tu implementación)
-        $user = $event->billable;
-
-        // Verifica que el usuario exista
-        if (!$user) {
-            Log::error("Usuario no encontrado en el evento SubscriptionCreated.");
-            return;
-        }
-
-        // Asigna créditos basado en el price_id
-        switch ($priceId) {
-            case 'pri_01ha2h3cqg5fervw0zr2zehk0b': // ID para el plan anual
-                $user->credits += 10000; // Asigna 10000 créditos para el plan anual
-                break;
-            case 'pri_01ha2h29b39sgwd9rj5ebwn7jr': // ID para el plan mensual
-                $user->credits += 1000; // Asigna 1000 créditos para el plan mensual
-                break;
-            default:
-                Log::info("Plan no reconocido con price_id: {$priceId}");
-                return;
-        }
-
-        // Guarda los cambios en el usuario
-        $user->save();
-        
-        Log::info("Créditos actualizados para el usuario: {$user->id}, nuevo saldo de créditos: {$user->credits}");
+    /**
+     * Determine if events and listeners should be automatically discovered.
+     */
+    public function shouldDiscoverEvents(): bool
+    {
+        return false;
     }
 }
