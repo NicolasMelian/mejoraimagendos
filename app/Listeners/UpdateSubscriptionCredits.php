@@ -6,6 +6,9 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Laravel\Spark\Events\SubscriptionUpdated;
 use App\Models\User;
+use Laravel\Spark\Plan;
+use Illuminate\Support\Facades\Log;
+
 
 class UpdateSubscriptionCredits
 {
@@ -22,6 +25,9 @@ class UpdateSubscriptionCredits
      */
     public function handle(SubscriptionUpdated $event): void
     {
+        \Log::info(print_r($event, true));
+
+
         $user = $event->user;
         $plan = $event->plan;
 
