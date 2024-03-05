@@ -93,11 +93,13 @@ return [
         'user' => [
             'model' => User::class,
 
+            'trial_days' => 0,
+
             'default_interval' => 'monthly',
 
             'plans' => [
                 [
-                    'name' => 'Suscripcion Imagen A Texto',
+                    'name' => 'Mejoraimagen',
                     'short_description' => 'This is a short, human friendly description of the plan.',
                     'monthly_id' =>  'pri_01ha2h29b39sgwd9rj5ebwn7jr',
                     'yearly_id' => 'pri_01ha2h3cqg5fervw0zr2zehk0b',
