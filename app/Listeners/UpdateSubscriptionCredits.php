@@ -4,7 +4,7 @@ namespace App\Listeners;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
-use Laravel\Paddle\Events\SubscriptionUpdated;
+use Spark\Events\SubscriptionUpdated;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
 
