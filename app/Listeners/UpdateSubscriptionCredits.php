@@ -2,8 +2,10 @@
 
 namespace App\Listeners;
 
-use Laravel\Paddle\Events\SubscriptionUpdated;
+use Laravel\Paddle\Events\SubscriptionCreated;
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
+
 
 
 class UpdateSubscriptionCredits
@@ -17,14 +19,7 @@ class UpdateSubscriptionCredits
 // Asumiendo que $event->payload ya es un array asociativo como se muestra en tu ejemplo
 $priceId = $event->payload['data']['items'][0]['price']['id'];
 
-// Encuentra al usuario basado en el customer_id
-$customerId = $event->payload['data']['customer_id'];
-$user = User::where('customer_id', $customerId)->first();
-
-if (!$user) {
-    Log::error("Usuario no encontrado con customer_id: {$customerId}");
-    return;
-}
+ $user = $event->billable;
 
 // Asigna créditos basado en el price_id
 switch ($priceId) {
