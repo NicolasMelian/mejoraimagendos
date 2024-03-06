@@ -8,8 +8,6 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use Illuminate\Support\Facades\Event;
 use Laravel\Paddle\Events\SubscriptionCreated;
 use App\Listeners\CreateCredits;
-use Laravel\Paddle\Events\SubscriptionUpdated;
-use App\Listeners\RefreshCredits;
 use Laravel\Paddle\Events\SubscriptionCanceled;
 use App\Listeners\DeleteCredits;
 
