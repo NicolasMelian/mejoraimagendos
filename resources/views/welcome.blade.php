@@ -30,6 +30,12 @@
                     @endauth
                 </div>
             @endif
+
+            @if(Auth::user() && user->suscribed()){
+                <p class="text-white">Tienes {{ $user->credits }}</p>
+            }
+            @endif
+
             <a class="text-white text-center justify-center flex" href="/billing">
                 Manage Subscription
             </a>

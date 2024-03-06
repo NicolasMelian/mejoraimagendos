@@ -1,48 +1,41 @@
 <?php
+
 namespace App\Listeners;
 
-use Laravel\Paddle\Events\SubscriptionCreated;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
+use Laravel\Paddle\Events\SubscriptionUpdated;
 use App\Models\User;
-use Illuminate\Support\Facades\Log;
 
-class UpdateSubscriptionCredits
+class UpdateSubscriptionCredits implements ShouldQueue
 {
+    use InteractsWithQueue;
+
     /**
      * Handle the event.
      */
-    public function handle(SubscriptionCreated $event): void
+    public function handle(SubscriptionUpdated $event): void
     {
-        // Acceso al price_id del payload del evento
-        $priceId = $event->payload['data']['items'][0]['price']['id'];
-
-        // Acceso al usuario billable (asegúrate de que este acceso sea correcto según tu implementación)
         $user = $event->billable;
+        $credits;
 
-        // Verifica que el usuario exista
-        if (!$user) {
-            Log::error("Usuario no encontrado en el evento SubscriptionCreated.");
+        // Verificar si hay un cambio programado y si es una cancelación
+        if (isset($event->payload['data']['scheduled_change']) && $event->payload['data']['scheduled_change']['action'] == 'cancel') {
+            // No hacer nada si la suscripción está programada para ser cancelada
             return;
         }
 
-        // log al price_id
-        Log::info("price_id: {$priceId}");
-
-        // Asigna créditos basado en el price_id
-        switch ($priceId) {
-            case 'pri_01ha2h3cqg5fervw0zr2zehk0b': // ID para el plan anual
-                $user->credits += 10000; // Asigna 10000 créditos para el plan anual
-                break;
-            case 'pri_01ha2h29b39sgwd9rj5ebwn7jr': // ID para el plan mensual
-                $user->credits += 1000; // Asigna 1000 créditos para el plan mensual
-                break;
-            default:
-                Log::info("Plan no reconocido con price_id: {$priceId}");
-                return;
+        // Asignar créditos basados en el price_id
+        if ($event->payload['data']['items'][0]['price']['id'] == 'pri_01ha2h29b39sgwd9rj5ebwn7jr') {
+            $credits = 1000; // Plan mensual
+        } elseif ($event->payload['data']['items'][0]['price']['id'] == 'pri_01ha2h3cqg5fervw0zr2zehk0b') {
+            $credits = 12000; // Plan anual
         }
 
-        // Guarda los cambios en el usuario
-        $user->save();
-        
-        Log::info("Créditos actualizados para el usuario: {$user->id}, nuevo saldo de créditos: {$user->credits}");
+        // Solo actualizar si se asignaron créditos
+        if ($credits > 0) {
+            $user->credits += $credits; // Suponiendo que quieres añadir créditos, no establecer un nuevo total
+            $user->save();
+        }
     }
 }
