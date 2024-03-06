@@ -19,7 +19,7 @@ class UpdateSubscriptionCredits
         $credits;
 
         // Verificar si hay un cambio programado y si es una cancelación
-        if (isset($event->payload['data']['scheduled_change']) && $event->payload['data']['scheduled_change']['action'] == 'cancel') {
+        if ($event->payload['data']['scheduled_change'] && $event->payload['data']['scheduled_change']['action'] == 'cancel') {
             // No hacer nada si la suscripción está programada para ser cancelada
             return;
         }
