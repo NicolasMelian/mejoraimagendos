@@ -16,8 +16,7 @@ class CreateCredits
     public function handle(SubscriptionCreated $event): void
     {
 
-        $user = $event->user;
-        $credits = 0;
+        $user = $event->billable;
 
         if($event->payload['data']['items'][0]['price']['id'] == 'pri_01ha2h29b39sgwd9rj5ebwn7jr'){
             $credits = 1000;
