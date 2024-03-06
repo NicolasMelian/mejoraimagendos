@@ -17,11 +17,12 @@ class UpdateSubscriptionCredits
         $user = $event->billable;
         $credits;
 
-        // Asignar créditos basados en el price_id
-        if ($event->payload['data']['items'][0]['price']['id'] == 'pri_01ha2h29b39sgwd9rj5ebwn7jr') {
-            $credits = 1000; // Plan mensual
-        } elseif ($event->payload['data']['items'][0]['price']['id'] == 'pri_01ha2h3cqg5fervw0zr2zehk0b') {
-            $credits = 12000; // Plan anual
+        if($event->payload['data']['items'][0]['price']['id'] == 'pri_01ha2h29b39sgwd9rj5ebwn7jr'){
+            $credits = 1000;
+        }else if($event->payload['data']['items'][0]['price']['id'] == 'pri_01ha2h29b39sgwd9rj5ebwn7jr'){
+            $credits = 12000;
+        } else {
+            $credits = 0;
         }
 
             $user->credits += $credits; // Suponiendo que quieres añadir créditos, no establecer un nuevo total
