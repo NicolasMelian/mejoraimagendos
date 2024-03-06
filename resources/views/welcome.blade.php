@@ -31,10 +31,10 @@
                 </div>
             @endif
 
-            @if(Auth::user() && user->suscribed()){
-                <p class="text-white">Tienes {{ $user->credits }}</p>
-            }
-            @endif
+            @if(Auth::user() && Auth::user()->subscribed())
+            <p class="text-white">Tienes {{ Auth::user()->credits }} créditos</p>
+        @endif
+        
 
             <a class="text-white text-center justify-center flex" href="/billing">
                 Manage Subscription
