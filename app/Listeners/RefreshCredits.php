@@ -19,7 +19,10 @@ class RefreshCredits
   $customerId = $event->payload['data']['customer_id'];
 
   // Buscando al usuario basado en el customer_id de Paddle
-  $user = User::where('paddle_id', $customerId)->first();
+    $customer = Customer::where('paddle_id', $customerId)->first();
+
+  // el id del customer encontrar el usuario y hacerlo una variable
+    $user = User::where('id', $customer->user_id)->first();
 
   // Asegúrate de que el usuario existe
   if (!$user) {
