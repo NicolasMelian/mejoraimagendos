@@ -17,6 +17,7 @@ class CreateCredits
     {
 
         $user = $event->billable;
+        $credits;
 
         if($event->payload['data']['items'][0]['price']['id'] == 'pri_01ha2h29b39sgwd9rj5ebwn7jr'){
             $credits = 1000;

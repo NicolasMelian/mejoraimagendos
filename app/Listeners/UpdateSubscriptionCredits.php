@@ -7,9 +7,8 @@ use Illuminate\Queue\InteractsWithQueue;
 use Laravel\Paddle\Events\SubscriptionUpdated;
 use App\Models\User;
 
-class UpdateSubscriptionCredits implements ShouldQueue
+class UpdateSubscriptionCredits
 {
-    use InteractsWithQueue;
 
     /**
      * Handle the event.
