@@ -15,23 +15,29 @@ class RefreshCredits
      */
     public function handle(SubscriptionUpdated $event): void
     {
-        $user = $event->billable;
+  // Extrayendo el customer_id del payload del evento
+  $customerId = $event->payload['data']['customer_id'];
 
-        $creditsToAdd = 0;
+  // Buscando al usuario basado en el customer_id de Paddle
+  $user = User::where('paddle_id', $customerId)->first();
 
-        $price_id = $event->payload['data']['items'][0]['price']['id'];
+  // Asegúrate de que el usuario existe
+  if (!$user) {
+      // Considera loguear este caso o manejarlo según sea necesario
+      return;
+  }
 
-        if($price_id == 'pri_01ha2h29b39sgwd9rj5ebwn7jr'){
-            $creditsToAdd = 1000;
-        }else if($price_id == 'pri_01ha2h3cqg5fervw0zr2zehk0b'){
-            $creditsToAdd = 12000;
-        } else {
-            $creditsToAdd = 0;
-        }
-    
-        $user->credits = $creditsToAdd;
-        $user->save();
+  // Ahora, realiza la lógica para actualizar los créditos, como antes
+  if ($event->payload['data']['items'][0]['price']['id'] == 'pri_01ha2h29b39sgwd9rj5ebwn7jr') {
+      $credits = 1000;
+  } else if ($event->payload['data']['items'][0]['price']['id'] == 'pri_01ha2h3cqg5fervw0zr2zehk0b') {
+      $credits = 10000;
+  } else {
+      $credits = 0;
+  }
 
-
-    }
+  // Actualizando los créditos del usuario
+  $user->credits += $credits;
+  $user->save();
+}
 }
