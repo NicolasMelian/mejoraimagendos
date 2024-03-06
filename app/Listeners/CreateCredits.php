@@ -14,13 +14,16 @@ class CreateCredits
      */
     public function handle(SubscriptionCreated $event): void
     {
+
+        $user = $event->user;
+        $credits = 0;
+        
         if($event->payload['data']['items'][0]['price']['id'] == 'pri_01ha2h29b39sgwd9rj5ebwn7jr'){
             $credits = 1000;
         }else{
             $credits = 10000;
         }
 
-        $user = $event->user;
 
         $user->credits += $credits;
         $user->save();
