@@ -20,7 +20,7 @@ class CreateCredits
 
         if($event->payload['data']['items'][0]['price']['id'] == 'pri_01ha2h29b39sgwd9rj5ebwn7jr'){
             $credits = 1000;
-        }else if($event->payload['data']['items'][0]['price']['id'] == 'pri_01ha2h29b39sgwd9rj5ebwn7jr'){
+        }else if($event->payload['data']['items'][0]['price']['id'] == 'pri_01ha2h3cqg5fervw0zr2zehk0b'){
             $credits = 12000;
         } else {
             $credits = 0;
