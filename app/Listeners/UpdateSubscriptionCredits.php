@@ -9,7 +9,6 @@ use App\Models\User;
 
 class UpdateSubscriptionCredits
 {
-
     /**
      * Handle the event.
      */
@@ -18,12 +17,6 @@ class UpdateSubscriptionCredits
         $user = $event->billable;
         $credits;
 
-        // Verificar si hay un cambio programado y si es una cancelación
-        if ($event->payload['data']['scheduled_change'] && $event->payload['data']['scheduled_change']['action'] == 'cancel') {
-            // No hacer nada si la suscripción está programada para ser cancelada
-            return;
-        }
-
         // Asignar créditos basados en el price_id
         if ($event->payload['data']['items'][0]['price']['id'] == 'pri_01ha2h29b39sgwd9rj5ebwn7jr') {
             $credits = 1000; // Plan mensual
@@ -31,10 +24,8 @@ class UpdateSubscriptionCredits
             $credits = 12000; // Plan anual
         }
 
-        // Solo actualizar si se asignaron créditos
-        if ($credits > 0) {
             $user->credits += $credits; // Suponiendo que quieres añadir créditos, no establecer un nuevo total
             $user->save();
-        }
+        
     }
 }

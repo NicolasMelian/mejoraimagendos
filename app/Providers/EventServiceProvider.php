@@ -10,7 +10,7 @@ use Laravel\Paddle\Events\SubscriptionCreated;
 use App\Listeners\CreateCredits;
 use Laravel\Paddle\Events\SubscriptionUpdated;
 use App\Listeners\UpdateSubscriptionCredits;
-use Larevel\Paddle\Events\SubscriptionCanceled;
+use Laravel\Paddle\Events\SubscriptionCanceled;
 use App\Listeners\DeleteCredits;
 
 
