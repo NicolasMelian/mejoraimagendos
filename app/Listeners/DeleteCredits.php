@@ -10,14 +10,6 @@ use App\Models\User;
 class DeleteCredits
 {
     /**
-     * Create the event listener.
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
      * Handle the event.
      */
     public function handle(SubscriptionCanceled $event): void

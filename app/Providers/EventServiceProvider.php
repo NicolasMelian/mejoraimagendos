@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Event;
 use Laravel\Paddle\Events\SubscriptionCreated;
 use App\Listeners\CreateCredits;
 use Laravel\Paddle\Events\SubscriptionUpdated;
-use App\Listeners\UpdateSubscriptionCredits;
+use App\Listeners\RefreshCredits;
 use Laravel\Paddle\Events\SubscriptionCanceled;
 use App\Listeners\DeleteCredits;
 
@@ -29,7 +29,7 @@ class EventServiceProvider extends ServiceProvider
             CreateCredits::class,
         ],
         SubscriptionUpdated::class => [
-            UpdateSubscriptionCredits::class,
+            RefreshCredits::class,
         ],
         SubscriptionCanceled::class => [
             DeleteCredits::class,
